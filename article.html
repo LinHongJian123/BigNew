@@ -55,77 +55,33 @@
 
     <div class="main_con clearfix">
         <div class="left_con setfr">
-            <div class="breadcrumb">
-                当前位置： <a href="#">首页</a> &gt; <a href="#">科技</a> &gt; 文章详情
-            </div>
-            <h3 class="article_title">马斯克的新花样？连接人脑和电脑的初创公司又筹了一笔钱</h3>
-            <div class="article_info">杰克 发布于 2019-05-08 07:08:46&nbsp;&nbsp;&nbsp;分类: 奇趣事&nbsp;&nbsp;&nbsp;阅读:
-                (98)&nbsp;&nbsp;&nbsp;评论: (0)</div>
-            <div class="article_con">
-
-                <p>“上天入地”还不够？硅谷“钢铁侠”马斯克名下一家低调的公司最近又融了一大笔钱。</p>
-
-                <p>马斯克投资的一家小型且不为人熟知的脑机接口（brain-computer
-                    interface）公司Neuralink披露，该公司融到了3900万美元，虽然不及公司计划的融资额5100万美元，但也比上次的融资多了不少。</p>
-
-                <p>两年前该公司曾计划融资1亿美元，但只拿到了2700万美元的融资。</p>
-
-                <p>在Neuralink递交给美国证券交易委员会（SEC）的材料中，并没有披露融资是否来自传统的风险投资者或者来自该公司的员工。</p>
-
-                <p>2016年，Neuralink在美国加利福尼亚州以医学研究公司的名义成立，之后一直低调运行。</p>
+            <div class="box">
 
             </div>
-            <div class="article_links">
-                上一篇： <a href="#">世界第一台可以玩游戏的冰箱</a><br>
-                下一篇： <a href="#">世界第一个可以玩游戏的马桶、世界上第一个可以玩游戏的茶杯</a>
-            </div>
 
-            <form action="" class="comment_form">
+            <form action="" class="comment_form" id="myForm">
+                <input type="hidden" name="articleId">
                 <div class="form_group">
                     <label>用户名：</label>
-                    <input type="text" placeholder="请输入用户名" class="comment_name">
+                    <input type="text" name="author" placeholder="请输入用户名" class="comment_name">
                 </div>
                 <div class="form_group">
                     <label>评论内容：</label>
-                    <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
+                    <textarea name="content" placeholder="请发表您的评论" class="comment_input"></textarea>
                 </div>
                 <div class="form_group">
-                    <input type="submit" name="" value="评 论" class="comment_sub"></div>
+                    <input type="submit" value="评 论" class="comment_sub">
+                </div>
             </form>
 
             <div class="comment_count">
                 4条评论
             </div>
 
+            <!-- 评论列表 -->
             <div class="comment_list_con">
-                <div class="comment_detail_list">
-                    <div class="person_pic fl">乔</div>
-                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-                    <div class="comment_text fl">
-                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-                    </div>
-                </div>
-                <div class="comment_detail_list">
-                    <div class="person_pic fl">段</div>
-                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-                    <div class="comment_text fl">
-                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-                    </div>
-                </div>
-                <div class="comment_detail_list">
-                    <div class="person_pic fl">虚</div>
-                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-                    <div class="comment_text fl">
-                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-                    </div>
-                </div>
-                <div class="comment_detail_list">
-                    <div class="person_pic fl">王</div>
-                    <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
-                    <div class="comment_text fl">
-                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。
-                    </div>
-                </div>
+
+
             </div>
         </div>
         <div class="right_con setfl">
@@ -206,9 +162,46 @@
     </div>
 
     <!-- 引入模板引擎js文件 -->
-    <script src="./js/template-web.js"></script>
-    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./libs/template-web.js"></script>
+    <script src="./libs/jquery-1.12.4.min.js"></script>
+    <!-- 引入接口文件 -->
+    <script src="./js/http.js"></script>
+    <!-- 引入工具函数 -->
+    <script src="./js/utils.js"></script>
+    <!-- 引入当前页面对应的js文件 -->
+    <script src="./js/article.js"></script>
 
+    <script type="text/teamplte" id="articleTmp">
+
+        <div class="breadcrumb">
+            当前位置： <a href="#">首页</a> &gt; <a href="#">{{category}}</a> &gt; 文章详情
+        </div>
+        <h3 class="article_title">{{title}}</h3>
+        <div class="article_info">{{author}} 发布于 {{date}}&nbsp;&nbsp;&nbsp;分类: {{category}}&nbsp;&nbsp;&nbsp;阅读:
+            ({{read}})&nbsp;&nbsp;&nbsp;评论: ({{comments}})</div>
+        <div class="article_con">
+            {{content}}
+
+        </div>
+        <div class="article_links">
+            上一篇： <a href="./article.html?id={{prev.id}}">{{prev.title}}</a><br>
+            下一篇： <a href="./article.html?id={{next.id}}">{{next.title}}</a>
+        </div>
+
+    </script>
+
+    <!-- 评论列表的模板 -->
+    <script type="text/template" id="commentListTmp">
+        {{each data value index}}
+        <div class="comment_detail_list">
+            <div class="person_pic fl">{{value.author.slice(0,1)}}</div>
+            <div class="name_time fl"><b>{{value.author}}</b><span>{{value.date}}</span></div>
+            <div class="comment_text fl">
+               {{value.content}}
+            </div>
+        </div>
+        {{/each}}
+    </script>
 </body>
 
 </html>
